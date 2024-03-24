@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add car</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <!-- startas med http://localhost:8080/form -->
+</head>
+
+<body>
+
+<h2>Add Car</h2>
+
+<div class="form-container">
+
+    <form action="/form" method="post">
+
+        <label for="regnr">Regnr:</label><br>
+        <input type="text" id="regnr" name="regnr" size="8"
+               required aria-label="Registration number"><br>
+
+        <label for="model">Model:</label><br>
+        <input type="text" id="model" name="model" size="8"
+               required aria-label="Model"><br>
+
+        <label for="year">Year:</label><br>
+        <input type="number" id="year" name="year" size="8"
+               required min="1930" max="2030" aria-label="Year"><br>
+
+        <input class="register" type="submit" value="Register"><br>
+    </form>
+</div>
+
+<div class="status-view">
+
+    <p>Status:<span th:text="${result}"></span></p>
+
+</div>
+
+<h2>All Cars</h2>
+
+<ul th:each="c: ${allcars}">
+    <li>
+        <span th:text="${c.regNo}"></span>,
+        <span th:text="${c.model}"></span>,
+        <span th:text="${c.year}"></span>
+        <!-- Ta bort-knappen -->
+        <form class="remove" th:action="@{/removecarbymodel}" method="post" onsubmit="return confirmDelete()">
+            <input type="hidden" name="model" th:value="${c.model}" />
+            <button type="submit" onclick="return confirmDelete(this.dataset.model)" data-model="${c.model}">Remove</button>
+        </form>
+    </li>
+</ul>
+
+<script>
+    function confirmDelete(carModel) {
+        return confirm("Are you sure you want to delete the car: " + carModel + "?");
+    }
+</script>
+
+</body>
+</html>

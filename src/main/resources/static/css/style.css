@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+h2 {
+    color: #333;
+    margin-top: 20px;
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
+form {
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.remove {
+    margin-left: 10px;
+}
+
+.status-view {
+    margin-left: 30px;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #106170;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2376ab;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
