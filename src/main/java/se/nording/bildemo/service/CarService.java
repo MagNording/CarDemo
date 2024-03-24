@@ -36,8 +36,7 @@ public class CarService {
             return "No cars found with the model name: " + model + ", try again";
         } else {
             for (Car car : cars) {
-                cRepo.deleteById(car.getRegNo()); // Antar att getReg() returnerar bilens unika
-                // registreringsnummer
+                cRepo.deleteById(car.getRegNo());
             }
             return cars.size() + " car(s) with model name " + model + " have been successfully removed";
         }
