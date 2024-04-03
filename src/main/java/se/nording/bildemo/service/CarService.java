@@ -12,12 +12,14 @@ public class CarService {
 
     private final CarRepository cRepo;
 
-    @Autowired
+    @Autowired // Dependency injection
     public CarService(CarRepository cRepo) {
         this.cRepo = cRepo;
     }
 
+    // Skapa en ny bil
     public String create(String regNo, String model, int year) {
+        // Kolla om bilen redan finns med regnr
         if (cRepo.existsById(regNo)) {
             return "Car already exists";
         } else {
@@ -26,19 +28,23 @@ public class CarService {
         }
     }
 
+    // Hämta alla bilar
     public List<Car> getAllCars() {
         return cRepo.findAll();
     }
 
+    // Ta bort bilar av en viss modell
     public String removeCarsByModel(String model) {
         List<Car> cars = cRepo.findByModel(model);
+        // Om bil arrayen är tom
         if (cars.isEmpty()) {
             return "No cars found with the model name: " + model + ", try again";
         } else {
             for (Car car : cars) {
                 cRepo.deleteById(car.getRegNo());
             }
-            return cars.size() + " car(s) with model name " + model + " have been successfully removed";
+            return cars.size() + " car(s) with model name " + model +
+                    " have been successfully removed";
         }
     }
 

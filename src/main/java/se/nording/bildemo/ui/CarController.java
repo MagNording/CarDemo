@@ -21,7 +21,7 @@ public class CarController {
     public String formGet(Model m) {
         m.addAttribute("result", "");
         m.addAttribute("allcars", cService.getAllCars());
-        return "formpage";
+        return "formpage"; // formpage.html för Thymeleaf att tugga på
     }
 
     @PostMapping("/form")
@@ -33,7 +33,7 @@ public class CarController {
         String resultString = cService.create(regNr, model, year);
         m.addAttribute("result", resultString);
         m.addAttribute("allcars", cService.getAllCars());
-        return "formpage";
+        return "formpage"; // formpage.html
     }
 
     @GetMapping("/all")
