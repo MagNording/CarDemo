@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import se.nording.bildemo.data.CarRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -19,12 +20,14 @@ public class CarService {
 
     // Skapa en ny bil
     public String create(String regNo, String model, int year) {
-        // Kolla om bilen redan finns med regnr
-        if (cRepo.existsById(regNo)) {
-            return "Car already exists";
-        } else {
-            cRepo.save(new Car(regNo, model, year));
-            return "Car saved successfully";
+        // Kolla om bilen redan finns med regnr (trådsäkert)
+        synchronized (this) {
+            if (cRepo.existsById(regNo)) {
+                return "Car already exists";
+            } else {
+                cRepo.save(new Car(regNo, model, year));
+                return "Car saved successfully";
+            }
         }
     }
 
@@ -48,4 +51,7 @@ public class CarService {
         }
     }
 
+    public Optional<Car> getCar(String regNo) {
+        return cRepo.findById(regNo);
+    }
 }
